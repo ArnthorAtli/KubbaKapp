@@ -13,25 +13,39 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
-
 public class Gull extends Pane {
 
     /**
-     * Smiður fyrir kassa, skráin lesinn inn og kassarnir smíðaðir í handahófskenndum lit
+     * Smiður fyrir kassa, skráin lesinn inn og kassarnir smíðaðir í handahófskenndum neon lit
      */
     public Gull() {
         FXML_Lestur.lesa(this, "gull-view.fxml");
         this.setPrefSize(50, 50);
 
-        Random random = new Random();
-        int r = random.nextInt(256);
-        int g = random.nextInt(256);
-        int b = random.nextInt(256);
-        Color randomColor = Color.rgb(r,g,b);
-
-        this.setBackground(new Background(new BackgroundFill(randomColor, null, null)));
+        Color neonColor = generateNeonColor();
+        this.setBackground(new Background(new BackgroundFill(neonColor, null, null)));
     }
-    public void pickUpAnim(Grafari player){
+
+    private Color generateNeonColor() {
+        Random random = new Random();
+        int highValue = 180 + random.nextInt(76);
+        int lowValue = random.nextInt(76);
+        int midValue = 100 + random.nextInt(156);
+
+        int[] values = new int[3];
+        int highIndex = random.nextInt(3);
+        values[highIndex] = highValue;
+
+        int lowIndex = (highIndex + 1 + random.nextInt(2)) % 3;
+        values[lowIndex] = lowValue;
+
+        int midIndex = 3 - highIndex - lowIndex;
+        values[midIndex] = midValue;
+
+        return Color.rgb(values[0], values[1], values[2]);
+    }
+
+    public void pickUpAnim(Grafari player) {
         TranslateTransition position = new TranslateTransition();
         double xMidjaGulls = this.getLayoutX() + this.getWidth() / 2;
         double yMidjaGulls = this.getLayoutY() + this.getHeight() / 2;
@@ -41,13 +55,16 @@ public class Gull extends Pane {
         position.setToY(-yMidjaGulls + yMidjaSpilara);
         position.setDuration(Duration.millis(100));
         position.setCycleCount(1);
+
         FadeTransition fade = new FadeTransition();
         RotateTransition rotate = new RotateTransition();
         ScaleTransition scale = new ScaleTransition();
+
         position.setNode(this);
         scale.setNode(this);
         fade.setNode(this);
         rotate.setNode(this);
+
         scale.setByX(-0.9);
         scale.setDuration(Duration.millis(100));
         fade.setDuration(Duration.millis(100));
@@ -55,16 +72,17 @@ public class Gull extends Pane {
         scale.setCycleCount(1);
         rotate.setCycleCount(1);
         fade.setCycleCount(1);
+
         rotate.setAxis(Rotate.Z_AXIS);
         int angle = 40;
         if(xMidjaGulls < xMidjaSpilara) angle *= -1;
         if (yMidjaGulls > yMidjaSpilara) angle *= -1;
         rotate.setByAngle(angle);
         fade.setToValue(0);
+
         fade.play();
         rotate.play();
         scale.play();
         position.play();
     }
-
 }
