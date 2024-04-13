@@ -28,8 +28,9 @@ public class Leikbord extends Pane {
      *
      * @param leikur leikur
      */
-    public void setLeikur(Leikur leikur) {
+    public void setLeikur(Leikur leikur,int nr) {
         this.leikur = leikur;
+        this.fxGrafari.setNr(nr);
     }
 
     /**

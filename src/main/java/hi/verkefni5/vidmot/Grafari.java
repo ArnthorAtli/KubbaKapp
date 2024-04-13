@@ -11,10 +11,18 @@ public class Grafari extends Pane {
     // TIlviksbreytur
     private Stefna nuverandiStefna;
     private ImageView imageView;
+    private int nr;
     private Image blueUp = getImage("/media/blueUp.png");
     private Image blueDown = getImage("/media/blueDown.png");
     private Image blueRight = getImage("/media/blueRight.png");
     private Image blueLeft = getImage("/media/blueLeft.png");
+
+    private Image redUp = getImage("/media/redUp.png");
+    private Image redDown = getImage("/media/redDown.png");
+    private Image redRight = getImage("/media/redRight.png");
+    private Image redLeft = getImage("/media/redLeft.png");
+
+
 
 
     /**
@@ -26,12 +34,33 @@ public class Grafari extends Pane {
         imageView = new ImageView();
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
-        imageView.setImage(blueUp);
+
+
+        if(this.nr==1){
+            imageView.setImage(blueUp);
+        }
+        else imageView.setImage(redUp);
 
         this.getChildren().add(imageView);
         this.setLayoutX(50);
         this.setLayoutY(50);
 
+    }
+
+    public void setNr(int nr){
+        this.nr =nr;
+        if(this.nr==1){
+            imageView.setImage(blueUp);
+        }
+        else imageView.setImage(redUp);
+
+    }
+
+    public double getX(){
+        return this.getLayoutX();
+    }
+    public double getY(){
+        return this.getLayoutY();
     }
 
     /**
@@ -51,11 +80,21 @@ public class Grafari extends Pane {
      */
 
     public void setStefna(Stefna stefna) {
-        switch (stefna){
-            case UPP -> imageView.setImage(blueUp);
-            case NIDUR -> imageView.setImage(blueDown);
-            case HAEGRI -> imageView.setImage(blueRight);
-            case VINSTRI -> imageView.setImage(blueLeft);
+        if(this.nr==1){
+            switch (stefna) {
+                case UPP -> imageView.setImage(blueUp);
+                case NIDUR -> imageView.setImage(blueDown);
+                case HAEGRI -> imageView.setImage(blueRight);
+                case VINSTRI -> imageView.setImage(blueLeft);
+            }
+        }
+        if(this.nr==2){
+            switch (stefna) {
+                case UPP -> imageView.setImage(redUp);
+                case NIDUR -> imageView.setImage(redDown);
+                case HAEGRI -> imageView.setImage(redRight);
+                case VINSTRI -> imageView.setImage(redLeft);
+            }
         }
         nuverandiStefna = stefna;
     }
@@ -74,18 +113,22 @@ public class Grafari extends Pane {
      * @param stefna stefna sem snúa á mynd í
      */
     public void myndirSamkvæmtStefnu(Stefna stefna) {
-        switch (stefna) {
-            case UPP -> imageView.setImage(blueUp);
-            case NIDUR -> imageView.setImage(blueDown);
-            case HAEGRI -> imageView.setImage(blueRight);
-            case VINSTRI -> imageView.setImage(blueLeft);
+        if(this.nr==1){
+            switch (stefna) {
+                case UPP -> imageView.setImage(blueUp);
+                case NIDUR -> imageView.setImage(blueDown);
+                case HAEGRI -> imageView.setImage(blueRight);
+                case VINSTRI -> imageView.setImage(blueLeft);
+            }
         }
-    }
+        if(this.nr==2){
+            switch (stefna) {
+                case UPP -> imageView.setImage(redUp);
+                case NIDUR -> imageView.setImage(redDown);
+                case HAEGRI -> imageView.setImage(redRight);
+                case VINSTRI -> imageView.setImage(redLeft);
+            }
+        }
 
-    public double getX() {
-        return this.getLayoutX();
-    }
-    public double getY() {
-        return this.getLayoutY();
     }
 }

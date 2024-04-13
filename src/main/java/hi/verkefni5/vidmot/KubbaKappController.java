@@ -123,9 +123,9 @@ public class KubbaKappController {
         leikur2 = new Leikur();
 
         fxLeikbord1.setFocusTraversable(true);
-        fxLeikbord1.setLeikur(leikur);
+        fxLeikbord1.setLeikur(leikur,1);
         fxLeikbord2.setFocusTraversable(true);
-        fxLeikbord2.setLeikur(leikur2);
+        fxLeikbord2.setLeikur(leikur2,2);
 
         String timi = erfidleikaval.getErfidleiki();
         stillaTima(timi);
@@ -365,8 +365,8 @@ public class KubbaKappController {
 
             fxLeikbord1.clear();
             fxLeikbord2.clear();
-            fxLeikbord1.setLeikur(leikur);
-            fxLeikbord2.setLeikur(leikur2);
+            fxLeikbord1.setLeikur(leikur,1);
+            fxLeikbord2.setLeikur(leikur2,2);
             fxLeikbord1.upphafsstillaGrafara();
             fxLeikbord2.upphafsstillaGrafara();
 
