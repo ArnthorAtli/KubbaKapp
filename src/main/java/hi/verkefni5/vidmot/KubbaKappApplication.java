@@ -18,8 +18,6 @@ public class KubbaKappApplication extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-
-
     }
     private static Innskraning loggedInLeikmadur1;
 

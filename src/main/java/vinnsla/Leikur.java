@@ -1,12 +1,14 @@
 package vinnsla;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.paint.Color;
 
 public class Leikur {
 
     //porperty tilviksbreytur
     private  SimpleIntegerProperty stig = new SimpleIntegerProperty(0);
     private SimpleIntegerProperty lif = new SimpleIntegerProperty(3);
+    private static boolean colorMax;
 
     /**
      * getter fyrir stig
@@ -61,7 +63,26 @@ public class Leikur {
         return lif;
     }
 
-    public static void main(String[] args) {
+    public Color newColor(Color color){
+        double red = color.getRed();
+        double green = color.getGreen();
+        double blue = color.getBlue();
 
+        if(red<=0){
+            colorMax = false;
+        } else if (red>=1) {
+            colorMax = true;
+        }
+        if(colorMax){
+            red = Math.min(1.0, red - 0.01);;
+        }
+        else{
+            red = Math.min(1.0, red + 0.01);
+        }
+
+
+        // Create a new color with updated red component
+        return new Color(red, green, blue, 1);
     }
+
 }

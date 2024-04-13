@@ -1,9 +1,12 @@
 package hi.verkefni5.vidmot;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import vinnsla.Leikur;
 
 public class Leikbord extends Pane {
@@ -15,6 +18,7 @@ public class Leikbord extends Pane {
     private ObservableList<Sprengja> sprengjuListi = FXCollections.observableArrayList();
     @FXML
     private Grafari fxGrafari;
+    private Warning warning;
 
     /**
      * Smiðurinn, fxml skráin lesin inn
@@ -197,23 +201,37 @@ public class Leikbord extends Pane {
         if(!leikurIGangi) {
             return;
         }
-        framleidaSprengju();
+        double maxX = this.getWidth() - 50;
+        double maxY = this.getHeight() - 50;
+
+        double randomX = Math.random() * maxX;
+        double randomY = Math.random() * maxY;
+        Timeline warningTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), event -> framleidaWarning(randomX,randomY)),
+                new KeyFrame(Duration.seconds(2), event -> {
+                    deleteWarning(randomX,randomY);
+                    framleidaSprengju(randomX,randomY);
+                })
+        );
+        warningTimeline.play();
+    }
+
+    private void deleteWarning(double randomX, double randomY) {
+        this.getChildren().remove(this.warning);
     }
 
     /**
      * Ný sprengja er búin til og birt á slembnum stað, henni er bætt í observable listann
      */
-    private void framleidaSprengju() {
+    private void framleidaWarning(double x, double y){
+        this.warning = new Warning();
+        warning.setLayoutX(x+20);
+        warning.setLayoutY(y+20);
+        this.getChildren().add(warning);
+
+    }
+    private void framleidaSprengju(double randomX,double randomY) {
         Sprengja s = new Sprengja();
-
-        double sprengjaWidth = 50.0;
-        double sprengjaHeight = 50.0;
-
-        double maxX = this.getWidth() - sprengjaWidth;
-        double maxY = this.getHeight() - sprengjaHeight;
-
-        double randomX = Math.random() * maxX;
-        double randomY = Math.random() * maxY;
 
         s.setLayoutX(randomX);
         s.setLayoutY(randomY);

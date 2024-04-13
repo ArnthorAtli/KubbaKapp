@@ -18,6 +18,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -30,8 +34,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Random;
 
 public class KubbaKappController {
+    @FXML
+    private Rectangle backgroundColor;
 
     //viðmótstilviksbreytur
 
@@ -93,6 +100,7 @@ public class KubbaKappController {
 
     /**
      * getter fyrir tilviksbreytuna
+     *
      * @return
      */
     public static KubbaKappController getInstance() {
@@ -123,9 +131,9 @@ public class KubbaKappController {
         leikur2 = new Leikur();
 
         fxLeikbord1.setFocusTraversable(true);
-        fxLeikbord1.setLeikur(leikur,1);
+        fxLeikbord1.setLeikur(leikur, 1);
         fxLeikbord2.setFocusTraversable(true);
-        fxLeikbord2.setLeikur(leikur2,2);
+        fxLeikbord2.setLeikur(leikur2, 2);
 
         String timi = erfidleikaval.getErfidleiki();
         stillaTima(timi);
@@ -152,12 +160,15 @@ public class KubbaKappController {
         raesaKlukku();
         hefjaLeik();
         fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
+
+        breytaBackground();
     }
 
 
     /**
      * Þegar ýtt er á stillingar pásast leikurinn og upp poppar valmyndarglugginn (dialog) sem lokast ekki
      * nema ýtt sé á halda áfram eða til baka
+     *
      * @param actionEvent ýtt á stillingar myndina
      * @throws IOException
      */
@@ -354,225 +365,238 @@ public class KubbaKappController {
         }
     }
 
-        /**
-         * leikurinn endurræstur og kallað á aðferðir til að hreinsa borðið, upphafsstilla kallana og stilla nýjan leik
-         *
-         */
-        public void endurraesa () {
-            nyjarTimalinur();
-            leikur = new Leikur();
-            leikur2 = new Leikur();
+    /**
+     * leikurinn endurræstur og kallað á aðferðir til að hreinsa borðið, upphafsstilla kallana og stilla nýjan leik
+     */
+    public void endurraesa() {
+        nyjarTimalinur();
+        leikur = new Leikur();
+        leikur2 = new Leikur();
 
-            fxLeikbord1.clear();
-            fxLeikbord2.clear();
-            fxLeikbord1.setLeikur(leikur,1);
-            fxLeikbord2.setLeikur(leikur2,2);
-            fxLeikbord1.upphafsstillaGrafara();
-            fxLeikbord2.upphafsstillaGrafara();
+        fxLeikbord1.clear();
+        fxLeikbord2.clear();
+        fxLeikbord1.setLeikur(leikur, 1);
+        fxLeikbord2.setLeikur(leikur2, 2);
+        fxLeikbord1.upphafsstillaGrafara();
+        fxLeikbord2.upphafsstillaGrafara();
 
-            fxStig.textProperty().unbind();
-            fxStig2.textProperty().unbind();
+        fxStig.textProperty().unbind();
+        fxStig2.textProperty().unbind();
 
-            stillaTima(erfidleikaval.getErfidleiki());
-            uppfaeraStigOgLif();
+        stillaTima(erfidleikaval.getErfidleiki());
+        uppfaeraStigOgLif();
 
-            klukka = new Klukka(timi);
-            fxTimi.textProperty().unbind();
-            fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
+        klukka = new Klukka(timi);
+        fxTimi.textProperty().unbind();
+        fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
 
-            raesaKlukku();
-            hefjaLeik();
-        }
+        raesaKlukku();
+        hefjaLeik();
+        breytaBackground();
+
+    }
+
+    private void breytaBackground() {
+        Random random = new Random();
+        int r = random.nextInt(80,256);
+        int g = random.nextInt(100,256);
+        int b = random.nextInt(60,256);
+        Color color1 = Color.rgb(r, g,b);
+        Color color2 = Color.rgb(r-80, g-100,b-60);
+        LinearGradient newGradient = new LinearGradient(0.5, 0, 0.5, 1, true, null,
+                new Stop(0, color1), new Stop(1, color2));
+        backgroundColor.setFill(newGradient);
+    }
 
     /**
      * Nýjar tímalínur smóðaðar
      */
-    private void nyjarTimalinur () {
-            if (gullTimeline != null) {
-                gullTimeline.stop();
-                gullTimeline = null;
-            }
-            if (sprengjuTimeline != null) {
-                sprengjuTimeline.stop();
-                sprengjuTimeline = null;
-            }
-            if (klukkuTimeline != null) {
-                klukkuTimeline.stop();
-                klukkuTimeline = null;
-            }
-            if (klukka != null) {
-                klukka.stop();
-            }
+    private void nyjarTimalinur() {
+        if (gullTimeline != null) {
+            gullTimeline.stop();
+            gullTimeline = null;
         }
+        if (sprengjuTimeline != null) {
+            sprengjuTimeline.stop();
+            sprengjuTimeline = null;
+        }
+        if (klukkuTimeline != null) {
+            klukkuTimeline.stop();
+            klukkuTimeline = null;
+        }
+        if (klukka != null) {
+            klukka.stop();
+        }
+    }
 
     /**
      * Sigin og lífin uppfærð
      */
-    public void uppfaeraStigOgLif () {
-            fxStig.textProperty().bind(Bindings.concat("Stig: ", leikur.getStigProperty().asString()));
-            fxStig2.textProperty().bind(Bindings.concat("Stig: ", leikur2.getStigProperty().asString()));
+    public void uppfaeraStigOgLif() {
+        fxStig.textProperty().bind(Bindings.concat("Stig: ", leikur.getStigProperty().asString()));
+        fxStig2.textProperty().bind(Bindings.concat("Stig: ", leikur2.getStigProperty().asString()));
 
-            leikur.getLifProperty().addListener((obs, oldVal, newVal) -> uppfaeraMynd(newVal.intValue()));
-            leikur2.getLifProperty().addListener((obs, oldVal, newVal) -> uppfaeraMynd2(newVal.intValue()));
+        leikur.getLifProperty().addListener((obs, oldVal, newVal) -> uppfaeraMynd(newVal.intValue()));
+        leikur2.getLifProperty().addListener((obs, oldVal, newVal) -> uppfaeraMynd2(newVal.intValue()));
 
-            hjortu1.setImage(getImage("/media/3_heart.png"));
-            hjortu2.setImage(getImage("/media/3_heart.png"));
-        }
+        hjortu1.setImage(getImage("/media/3_heart.png"));
+        hjortu2.setImage(getImage("/media/3_heart.png"));
+    }
 
-        /**
-         * hreyfingin stillt til að breyta stefnunni
-         */
-        private void stillaHreyfingu () {
-            hreyfing = event -> {
-                Stefna stefna = map1.get(event.getCode());
-                if (stefna != null) {
+    /**
+     * hreyfingin stillt til að breyta stefnunni
+     */
+    private void stillaHreyfingu() {
+        hreyfing = event -> {
+            Stefna stefna = map1.get(event.getCode());
+            if (stefna != null) {
 
-                    fxLeikbord1.setStefna(stefna);
-                    fxLeikbord1.afram();
-                }
-
-                Stefna stefna2 = map2.get(event.getCode());
-                if (stefna2 != null) {
-
-                    fxLeikbord2.setStefna(stefna2);
-                    fxLeikbord2.afram();
-                }
-            };
-        }
-
-        /**
-         * Getter fyrir mynd
-         *
-         * @param urlS url myndarinnar
-         * @return myndinni skilað
-         */
-        private Image getImage (String urlS){
-            URL url = getClass().getResource(urlS);
-            assert url != null;
-            return new Image(url.toExternalForm());
-
-        }
-
-        /**
-         * Hjörtu leikmanns 1 eru uppfærð
-         *
-         * @param lif fjöldi lífa sem leikmaður á eftir
-         */
-        private void uppfaeraMynd ( int lif){
-            String url = "/media/" + lif + "_heart.png";
-            Image mynd = new Image(getClass().getResourceAsStream(url));
-            hjortu1.setImage(mynd);
-            if (leikur.getLif() == 0) {
-                leikLokid();
-            }
-        }
-
-        /**
-         * Hjörtu leikmanns 2 eru uppfærð
-         *
-         * @param lif fjöldi lífa sem leikmaður á eftir
-         */
-        private void uppfaeraMynd2 ( int lif){
-            String url = "/media/" + lif + "_heart.png";
-            Image mynd = new Image(getClass().getResourceAsStream(url));
-            hjortu2.setImage(mynd);
-            if (leikur2.getLif() == 0) {
-                leikLokid();
-            }
-        }
-
-        /**
-         * Lagið er spilað
-         */
-        public void spilaLag () {
-            if (!hljodstillingar.erHljodKveikt()) {
-                return;
+                fxLeikbord1.setStefna(stefna);
+                fxLeikbord1.afram();
             }
 
-            if (mediaPlayer == null || !mediaPlayer.getMedia().getSource().endsWith("/media/lag.mp3")) {
-                if (mediaPlayer != null) {
-                    mediaPlayer.stop();
-                }
-                URL mediaUrl = getClass().getResource("/media/lag.mp3");
-                if (mediaUrl != null) {
-                    Media media = new Media(mediaUrl.toExternalForm());
-                    mediaPlayer = new MediaPlayer(media);
-                    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                }
+            Stefna stefna2 = map2.get(event.getCode());
+            if (stefna2 != null) {
+
+                fxLeikbord2.setStefna(stefna2);
+                fxLeikbord2.afram();
             }
-            mediaPlayer.play();
+        };
+    }
+
+    /**
+     * Getter fyrir mynd
+     *
+     * @param urlS url myndarinnar
+     * @return myndinni skilað
+     */
+    private Image getImage(String urlS) {
+        URL url = getClass().getResource(urlS);
+        assert url != null;
+        return new Image(url.toExternalForm());
+
+    }
+
+    /**
+     * Hjörtu leikmanns 1 eru uppfærð
+     *
+     * @param lif fjöldi lífa sem leikmaður á eftir
+     */
+    private void uppfaeraMynd(int lif) {
+        String url = "/media/" + lif + "_heart.png";
+        Image mynd = new Image(getClass().getResourceAsStream(url));
+        hjortu1.setImage(mynd);
+        if (leikur.getLif() == 0) {
+            leikLokid();
+        }
+    }
+
+    /**
+     * Hjörtu leikmanns 2 eru uppfærð
+     *
+     * @param lif fjöldi lífa sem leikmaður á eftir
+     */
+    private void uppfaeraMynd2(int lif) {
+        String url = "/media/" + lif + "_heart.png";
+        Image mynd = new Image(getClass().getResourceAsStream(url));
+        hjortu2.setImage(mynd);
+        if (leikur2.getLif() == 0) {
+            leikLokid();
+        }
+    }
+
+    /**
+     * Lagið er spilað
+     */
+    public void spilaLag() {
+        if (!hljodstillingar.erHljodKveikt()) {
+            return;
         }
 
-        /**
-         * Lagið er stoppað
-         */
-        public void stoppaLag(){
+        if (mediaPlayer == null || !mediaPlayer.getMedia().getSource().endsWith("/media/lag.mp3")) {
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
             }
-        }
-
-        /**
-         * Sigurvegari er valinn, annað hvort sá sem missti ekki öll líf sín eða sá sem var með flest stig þegar tíminn rann út
-         * Alert gluggi poppar upp með tilkynningu og notandi getur valið um að hætta leik eða spila aftur
-         */
-        public void tilkynnaSigurvegara () {
-            int stig1 = leikur.getStig();
-            int stig2 = leikur2.getStig();
-
-            String tilkynning;
-            if (leikur.getLif() == 0) {
-                tilkynning = fxLeikmadur1.getText() + " vinnur";
-            } else if (leikur2.getLif() == 0) {
-                tilkynning = fxLeikmadur2.getText() +" vinnur";
-            } else if (stig1 > stig2) {
-                tilkynning = fxLeikmadur2.getText() +" vinnur með " + stig1 + " stig!";
-            } else if (stig2 > stig1) {
-                tilkynning = fxLeikmadur1.getText() +" vinnur með " + stig2 + " stig!";
-            } else {
-                tilkynning = "Jafntefli! Báðir leikmenn fengu " + stig1 + " stig.";
+            URL mediaUrl = getClass().getResource("/media/lag.mp3");
+            if (mediaUrl != null) {
+                Media media = new Media(mediaUrl.toExternalForm());
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             }
-
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Leik lokið");
-                alert.setHeaderText(tilkynning);
-                alert.setContentText("Viltu spila aftur eða hætta?");
-
-                ButtonType playAgainButton = new ButtonType("Spila aftur");
-                ButtonType quitButton = new ButtonType("Hætta", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                alert.getButtonTypes().setAll(playAgainButton, quitButton);
-
-                URL url = getClass().getResource("/media/bikar.png");
-                assert url != null;
-
-                ImageView customImage = null;
-                try {
-                    customImage = new ImageView(new Image(url.openStream()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                customImage.setFitWidth(100);
-                customImage.setFitHeight(100);
-                alert.getDialogPane().setGraphic(customImage);
-
-                DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 16px; -fx-padding: 7px;");
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == playAgainButton) {
-                    endurraesa();
-                    fxLeikbord1.raesaLeik();
-                    fxLeikbord2.raesaLeik();
-                } else {
-                    System.exit(0);
-                }
-            });
         }
+        mediaPlayer.play();
+    }
 
-        public void setLeikmennNofn(String nafn1, String nafn2){
-            fxLeikmadur1.setText(nafn1);
-            fxLeikmadur2.setText(nafn2);
+    /**
+     * Lagið er stoppað
+     */
+    public void stoppaLag() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
         }
     }
+
+    /**
+     * Sigurvegari er valinn, annað hvort sá sem missti ekki öll líf sín eða sá sem var með flest stig þegar tíminn rann út
+     * Alert gluggi poppar upp með tilkynningu og notandi getur valið um að hætta leik eða spila aftur
+     */
+    public void tilkynnaSigurvegara() {
+        int stig1 = leikur.getStig();
+        int stig2 = leikur2.getStig();
+
+        String tilkynning;
+        if (leikur.getLif() == 0) {
+            tilkynning = fxLeikmadur1.getText() + " vinnur";
+        } else if (leikur2.getLif() == 0) {
+            tilkynning = fxLeikmadur2.getText() + " vinnur";
+        } else if (stig1 > stig2) {
+            tilkynning = fxLeikmadur2.getText() + " vinnur með " + stig1 + " stig!";
+        } else if (stig2 > stig1) {
+            tilkynning = fxLeikmadur1.getText() + " vinnur með " + stig2 + " stig!";
+        } else {
+            tilkynning = "Jafntefli! Báðir leikmenn fengu " + stig1 + " stig.";
+        }
+
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Leik lokið");
+            alert.setHeaderText(tilkynning);
+            alert.setContentText("Viltu spila aftur eða hætta?");
+
+            ButtonType playAgainButton = new ButtonType("Spila aftur");
+            ButtonType quitButton = new ButtonType("Hætta", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(playAgainButton, quitButton);
+
+            URL url = getClass().getResource("/media/bikar.png");
+            assert url != null;
+
+            ImageView customImage = null;
+            try {
+                customImage = new ImageView(new Image(url.openStream()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            customImage.setFitWidth(100);
+            customImage.setFitHeight(100);
+            alert.getDialogPane().setGraphic(customImage);
+
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 16px; -fx-padding: 7px;");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == playAgainButton) {
+                endurraesa();
+                fxLeikbord1.raesaLeik();
+                fxLeikbord2.raesaLeik();
+            } else {
+                System.exit(0);
+            }
+        });
+    }
+
+    public void setLeikmennNofn(String nafn1, String nafn2) {
+        fxLeikmadur1.setText(nafn1);
+        fxLeikmadur2.setText(nafn2);
+    }
+}

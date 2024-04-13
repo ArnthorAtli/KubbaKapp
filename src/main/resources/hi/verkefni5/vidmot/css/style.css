@@ -13,12 +13,7 @@
 #fxLeikbord2 {
     -fx-background-color: grey;
 }
-#fxGrafari1{
-        -fx-background-image: url("/media/mynd.png");
-        -fx-background-size: cover; /* or contain, depending on your needs */
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
-}
+
 
 #fxStillingar {
     -fx-background-color: transparent;
