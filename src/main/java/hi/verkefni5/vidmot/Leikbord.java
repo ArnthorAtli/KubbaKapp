@@ -227,7 +227,7 @@ public class Leikbord extends Pane {
         this.warning = new Warning();
         warning.setLayoutX(x+20);
         warning.setLayoutY(y+20);
-        this.getChildren().add(warning);
+        warning.warningAnim(this);
 
     }
     private void framleidaSprengju(double randomX,double randomY) {
