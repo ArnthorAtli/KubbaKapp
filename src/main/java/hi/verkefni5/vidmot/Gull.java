@@ -1,9 +1,6 @@
 package hi.verkefni5.vidmot;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -24,6 +21,7 @@ public class Gull extends Pane {
 
         Color neonColor = generateNeonColor();
         this.setBackground(new Background(new BackgroundFill(neonColor, null, null)));
+        setVisible(false);
     }
 
     private Color generateNeonColor() {
@@ -84,5 +82,22 @@ public class Gull extends Pane {
         rotate.play();
         scale.play();
         position.play();
+    }
+    public void spawnAnim(Leikbord leikbord){
+        ScaleTransition scale = new ScaleTransition();
+        scale.setNode(this);
+        scale.setDuration(Duration.millis(200));
+        scale.setFromX(0.1);
+        scale.setToX(1);
+        scale.setCycleCount(1);
+        Timeline errorTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), event -> scale.play()),
+                new KeyFrame(Duration.seconds(0.1), event -> {
+                    setVisible(true);
+                    leikbord.getChildren().add(this);
+                })
+        );
+        //spilum animation 0.1 sek eftir að animation byrjar vegna þess að annars byrjar gullið í original size og spilar svo animation
+        errorTimeline.play();
     }
 }

@@ -31,15 +31,4 @@ public class Warning extends Circle {
         );
         warningTimeline.play();
     }
-
-    public ScaleTransition stretchSquish() {
-        ScaleTransition scale = new ScaleTransition();
-        scale.setNode(this);
-        scale.setDuration(Duration.millis(1));
-        scale.setCycleCount(Timeline.INDEFINITE);
-        scale.setAutoReverse(true);
-        scale.setByX(0.5);
-        scale.setByY(-0.5);
-        return scale;
-    }
 }

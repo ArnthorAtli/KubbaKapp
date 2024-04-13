@@ -154,8 +154,7 @@ public class Leikbord extends Pane {
 
         g.setLayoutX(randomX);
         g.setLayoutY(randomY);
-
-        this.getChildren().add(g);
+        g.spawnAnim(this);
         gullListi.add(g);
     }
 
