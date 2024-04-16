@@ -10,7 +10,10 @@ leikinn, þó er líka hægt að vinna ef andstæðingur missir öll lífin sín
 
 Nota þarf maven til þess að keyra forritið, best er að gera compile:compile fyrst og svo 
 javafx:run. Einnig er hægt að keyra forritið í gegnum command line, þá skal skrifa skipanirnar í 
-terminal inni í forritinu, fyrst mvn compile og svo mvn javafx:run.
+terminal inni í forritinu, fyrst: 
+`mvn compile` til þess að compile-a forritið 
+og síðan: 
+`mvn javafx:run` til þess að keyra alla klasana í forritinu
 
 ## Útgáfusaga
 
