@@ -24,6 +24,10 @@ public class Gull extends Pane {
         setVisible(false);
     }
 
+    /**
+     * Býr til neon lit
+     * @return neon litur
+     */
     private Color generateNeonColor() {
         Random random = new Random();
         int highValue = 180 + random.nextInt(76);

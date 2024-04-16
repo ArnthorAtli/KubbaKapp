@@ -98,6 +98,8 @@ public class ValmyndController {
         }
     }
 
+
+
     /**
      * Alert dialog sem spyr hvort notandinn vilji hætta leik
      *

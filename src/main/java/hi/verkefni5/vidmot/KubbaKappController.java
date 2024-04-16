@@ -51,10 +51,6 @@ public class KubbaKappController {
 
     private MediaPlayer mediaPlayer;
 
-    private MediaPlayer tikkPlayer;
-
-    private MediaPlayer winPlayer;
-
     @FXML
     private Label fxLeikmadur1;
 
@@ -164,19 +160,6 @@ public class KubbaKappController {
         raesaKlukku();
         hefjaLeik();
         fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
-
-        klukka.getKlukkaProperty().addListener((obs, oldTimi, newTimi) -> {
-            if (newTimi.intValue() == 6) {
-                spilaTikk();
-            }
-        });
-
-        klukka.getKlukkaProperty().addListener((obs, oldTimi, newTimi) -> {
-            if (newTimi.intValue() == 1) {
-                spilaWin();
-            }
-        });
-
 
 
         breytaBackground();
@@ -299,6 +282,7 @@ public class KubbaKappController {
 
         if (klukkuTimeline != null) {
             klukkuTimeline.stop();
+            klukkuTimeline = null;
         }
 
         klukkuTimeline = new Timeline(keyFrame);    // búin til tímalína fyrir leikinn
@@ -363,6 +347,8 @@ public class KubbaKappController {
         if (klukka != null) {
             klukka.pause();
         }
+
+
     }
 
     /**
@@ -388,18 +374,6 @@ public class KubbaKappController {
      */
     public void endurraesa() {
         nyjarTimalinur();
-
-        if (tikkPlayer != null) {
-            tikkPlayer.stop();
-            tikkPlayer.dispose();
-            tikkPlayer = null;
-        }
-        if (winPlayer != null) {
-            winPlayer.stop();
-            winPlayer.dispose();
-            winPlayer = null;
-        }
-
         leikur = new Leikur();
         leikur2 = new Leikur();
 
@@ -417,20 +391,9 @@ public class KubbaKappController {
         uppfaeraStigOgLif();
 
         klukka = new Klukka(timi);
+
         fxTimi.textProperty().unbind();
         fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
-
-        klukka.getKlukkaProperty().addListener((obs, oldTimi, newTimi) -> {
-            if (newTimi.intValue() == 6) {
-                spilaTikk();
-            }
-        });
-
-        klukka.getKlukkaProperty().addListener((obs, oldTimi, newTimi) -> {
-            if (newTimi.intValue() == 1) {
-                spilaWin();
-            }
-        });
 
         raesaKlukku();
         hefjaLeik();
@@ -466,10 +429,13 @@ public class KubbaKappController {
             klukkuTimeline.stop();
             klukkuTimeline = null;
         }
+
         if (klukka != null) {
             klukka.stop();
         }
+
     }
+
 
     /**
      * Sigin og lífin uppfærð
@@ -634,45 +600,13 @@ public class KubbaKappController {
         });
     }
 
-    /**
-     * Spilar hljóð tifandi klukku þegar 5 sekúndur eru eftir af tímanum
-     */
-    public void spilaTikk() {
-        if (!hljodstillingar.erHljodKveikt()) {
-            return;
-        }
 
-        if (tikkPlayer == null) {
-            URL mediaUrl = getClass().getResource("/media/tikk.mp3");
-            if (mediaUrl != null) {
-                Media media = new Media(mediaUrl.toExternalForm());
-                tikkPlayer = new MediaPlayer(media);
-            }
-        }
-        tikkPlayer.play();
-    }
-
-
-    /**
-     * Spilar hljóð þegar leik er lokið
-     */
-    public void spilaWin() {
-        if (!hljodstillingar.erHljodKveikt()) {
-            return;
-        }
-
-        if (winPlayer == null) {
-            URL mediaUrl = getClass().getResource("/media/win.mp3");
-            if (mediaUrl != null) {
-                Media media = new Media(mediaUrl.toExternalForm());
-                winPlayer = new MediaPlayer(media);
-            }
-        }
-        winPlayer.play();
-    }
 
     public void setLeikmennNofn(String nafn1, String nafn2) {
         fxLeikmadur1.setText(nafn1);
         fxLeikmadur2.setText(nafn2);
     }
+
+
+
 }
