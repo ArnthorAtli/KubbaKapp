@@ -2,14 +2,14 @@
 Velkomin í Kubbakapp, spennandi tveggja manna leik fyrir þá sem vantar eitthvað til að skemmta sér saman í. 
 Í Kubbakappi keppist hvor leikmaður við að safna eins mörgum stigum og hægt er á meðan hann ferðast um spilaborð með 
 skyndilegum og ófyrirsjáanlegum sprengjutilkomum. Það er mikið í húfi: hver leikmaður á aðeins þrjú líf og að klessa á sprengju
-getur reynst dýrkeypt. Undirbúðu þig fyrir mikið keppnisskap og grípandi áskorun 
+getur reynst dýrkeypt. Undirbúðu þig fyrir mikið keppnisskap og grípandi áskorun.
 
 
 ## Leiklýsing
 
 Kubbakapp er leikur þar sem tveir notendur spila á móti hvor öðrum með það markmið
 að safna stigum og forðast sprengjur sem birtast af handahófi á spilaborðinu. Notendur slá inn nöfn sín í 
-upphafi leiks og velja ákjósanlega erfiðleikastig, sem hefur áhrif á lengd leiksins.
+upphafi leiks og velja ákjósanlega erfiðleikastig, sem hefur áhrif á hve lengi leikurinn stendur yfir.
 
 Passa sig verður á sprengjum sem birtast að handahófi
 á leikborðinu vegna þess ef leikmaður lendir á sprengju missir hann líf. Hvor leikmaður hefur aðeins
