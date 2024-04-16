@@ -1,8 +1,8 @@
 # Kubbakapp
 Velkomin í Kubbakapp, spennandi tveggja manna leik fyrir þá sem vantar eitthvað til að skemmta sér saman í. 
-Í Kubbakappi keppist hvor leikmaður við að safna eins mörgum stigum og hægt er á meðan hann siglir um spilaborð með 
-skyndilegum og ófyrirsjáanlegum sprengjutilkomum. Það er mikið í húfi: hver leikmaður á aðeins þrjú líf og eitt mistök
-á sprengju getur reynst dýrkeypt. Undirbúðu þig fyrir mikið keppnisskap og grípandi áskorun 
+Í Kubbakappi keppist hvor leikmaður við að safna eins mörgum stigum og hægt er á meðan hann ferðast um spilaborð með 
+skyndilegum og ófyrirsjáanlegum sprengjutilkomum. Það er mikið í húfi: hver leikmaður á aðeins þrjú líf og að klessa á sprengju
+getur reynst dýrkeypt. Undirbúðu þig fyrir mikið keppnisskap og grípandi áskorun 
 
 
 ## Leiklýsing
