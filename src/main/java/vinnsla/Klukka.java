@@ -9,31 +9,27 @@ import javafx.util.Duration;
 
 public class Klukka {
 
-    //property tilviksbreyta
+    //tilviksbreytur
     private SimpleIntegerProperty klukkaProperty;
     private Timeline timeline;
 
-
     /**
      * Klukkan búin til
-     *
+     * Kallar á tic
+     * Búum til timalinu sem uppfærist á hverri sekúndu og gengur endalaust     *
      * @param startTimi upphafstíminn stilltur
      */
     public Klukka(int startTimi) {
-
         klukkaProperty = new SimpleIntegerProperty(startTimi);
 
-        //kallað á tic
         EventHandler<ActionEvent> eventHandler = e -> {
             tic();
         };
 
-        // Búum til timalinu sem uppfærist á hverri sekúndu og gengur endalaust
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), eventHandler));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
 
     /**
      * Klukkan er minnkuð um 1 þangað til tíminn er búinn
@@ -43,7 +39,6 @@ public class Klukka {
             klukkaProperty.set(klukkaProperty.get() - 1);
         } else {
             stop();
-
         }
     }
 

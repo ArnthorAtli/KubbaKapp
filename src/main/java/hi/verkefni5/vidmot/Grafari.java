@@ -16,13 +16,10 @@ public class Grafari extends Pane {
     private Image blueDown = getImage("/media/blueDown.png");
     private Image blueRight = getImage("/media/blueRight.png");
     private Image blueLeft = getImage("/media/blueLeft.png");
-
     private Image redUp = getImage("/media/redUp.png");
     private Image redDown = getImage("/media/redDown.png");
     private Image redRight = getImage("/media/redRight.png");
     private Image redLeft = getImage("/media/redLeft.png");
-
-
 
 
     /**
@@ -35,7 +32,6 @@ public class Grafari extends Pane {
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
 
-
         if(this.nr==1){
             imageView.setImage(blueUp);
         }
@@ -44,21 +40,32 @@ public class Grafari extends Pane {
         this.getChildren().add(imageView);
         this.setLayoutX(50);
         this.setLayoutY(50);
-
     }
 
+    /**
+     * Setur mynd sem tilheyrir viðeigandi leikamnni
+     * @param nr numer leikmanns
+     */
     public void setNr(int nr){
         this.nr =nr;
         if(this.nr==1){
             imageView.setImage(blueUp);
         }
         else imageView.setImage(redUp);
-
     }
 
+    /**
+     * Getter fyrir staðsetningu x-ás á leikborði
+     * @return skilar staðsetningu x-ás á leikborði
+     */
     public double getX(){
         return this.getLayoutX();
     }
+
+    /**
+     * Getter fyrir staðsetningu y-ás á leikborði
+     * @return skilar staðsetningu y-ás á leikborði
+     */
     public double getY(){
         return this.getLayoutY();
     }
@@ -78,7 +85,6 @@ public class Grafari extends Pane {
      * Setter fyrir stefnu
      * @param stefna
      */
-
     public void setStefna(Stefna stefna) {
         if(this.nr==1){
             switch (stefna) {
@@ -129,6 +135,5 @@ public class Grafari extends Pane {
                 case VINSTRI -> imageView.setImage(redLeft);
             }
         }
-
     }
 }

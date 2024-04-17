@@ -37,23 +37,16 @@ import java.util.Optional;
 import java.util.Random;
 
 public class KubbaKappController {
-    @FXML
-    private Rectangle backgroundColor;
 
     //viðmótstilviksbreytur
-
+    @FXML
+    private Rectangle backgroundColor;
     @FXML
     private ImageView hjortu2;
     @FXML
     private ImageView hjortu1;
-
-    //viðmótstilviksbreytur
-
-    private MediaPlayer mediaPlayer;
-
     @FXML
     private Label fxLeikmadur1;
-
     @FXML
     private Label fxLeikmadur2;
     @FXML
@@ -72,11 +65,10 @@ public class KubbaKappController {
     // heiltölu fyrir KeyCode
     private static final HashMap<KeyCode, Stefna> map1 = new HashMap<KeyCode, Stefna>();
     private static final HashMap<KeyCode, Stefna> map2 = new HashMap<KeyCode, Stefna>();
-
-    //final tilviksbreytur
     public static final int INTERVAL = 100;
 
     //tilviksbreytur
+    private MediaPlayer mediaPlayer;
     private Klukka klukka;
     private Leikur leikur = new Leikur();
     private Leikur leikur2 = new Leikur();
@@ -85,8 +77,6 @@ public class KubbaKappController {
     private Timeline klukkuTimeline;
     private Timeline sprengjuTimeline;
     private EventHandler<KeyEvent> hreyfing;
-    private EventHandler<KeyEvent> hreyfing2;
-
     private Erfidleikaval erfidleikaval = Erfidleikaval.getValNotanda();
     private Hljodstillingar hljodstillingar = Hljodstillingar.getHljodstillingar();
     private static KubbaKappController instance;
@@ -161,7 +151,6 @@ public class KubbaKappController {
         hefjaLeik();
         fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
 
-
         breytaBackground();
     }
 
@@ -171,20 +160,16 @@ public class KubbaKappController {
      * nema ýtt sé á halda áfram eða til baka
      *
      * @param actionEvent ýtt á stillingar myndina
-     * @throws IOException
      */
     @FXML
-    public void onStillingar(ActionEvent actionEvent) throws IOException {
+    public void onStillingar(ActionEvent actionEvent){
         pause();
-
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         try {
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("valmynd-view.fxml"));
             VBox content = fxmlLoader.load();
             Dialog<Void> dialog = new Dialog<>();
-
 
             DialogPane dialogPane = new DialogPane();
             dialogPane.setContent(content);
@@ -265,7 +250,6 @@ public class KubbaKappController {
         sprengjuTimeline.play();
     }
 
-
     /**
      * klukka ræst og keyframe búinn til fyrir hana sem uppfærist á hveri sekúndu og kallar á tic fallið
      * Ný tímalína fer í gang sem er stöðvuð þegar tíminn er búinn og þá er kallað á leiklokið
@@ -288,7 +272,6 @@ public class KubbaKappController {
         klukkuTimeline = new Timeline(keyFrame);    // búin til tímalína fyrir leikinn
         klukkuTimeline.setCycleCount(Timeline.INDEFINITE);
         klukkuTimeline.play();
-
 
         fxTimi.textProperty().bind(Bindings.concat(klukka.getKlukkaProperty().asString(), " sek"));
 
@@ -347,8 +330,6 @@ public class KubbaKappController {
         if (klukka != null) {
             klukka.pause();
         }
-
-
     }
 
     /**
@@ -398,9 +379,11 @@ public class KubbaKappController {
         raesaKlukku();
         hefjaLeik();
         breytaBackground();
-
     }
 
+    /**
+     * Breytir lit á bakrunni í hverjum nýjum leik
+     */
     private void breytaBackground() {
         Random random = new Random();
         int r = random.nextInt(80,256);
@@ -429,13 +412,10 @@ public class KubbaKappController {
             klukkuTimeline.stop();
             klukkuTimeline = null;
         }
-
         if (klukka != null) {
             klukka.stop();
         }
-
     }
-
 
     /**
      * Sigin og lífin uppfærð
@@ -482,7 +462,6 @@ public class KubbaKappController {
         URL url = getClass().getResource(urlS);
         assert url != null;
         return new Image(url.toExternalForm());
-
     }
 
     /**
@@ -601,7 +580,11 @@ public class KubbaKappController {
     }
 
 
-
+    /**
+     * Setter fyrir nöfn notenda
+     * @param nafn1 nafn annars notenda
+     * @param nafn2 nafn hins notenda
+     */
     public void setLeikmennNofn(String nafn1, String nafn2) {
         fxLeikmadur1.setText(nafn1);
         fxLeikmadur2.setText(nafn2);

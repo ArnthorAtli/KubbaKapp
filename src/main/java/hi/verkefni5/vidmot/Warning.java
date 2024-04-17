@@ -8,11 +8,19 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class Warning extends Circle {
+    /**
+     * Siður sem býr til Warning hlut sem er rauður
+     */
     public Warning() {
         super(20);
         this.setFill(Color.rgb(255, 0, 0, 0.5));
         this.setVisible(false);
     }
+
+    /**
+     * Animation fyrir warning hlut
+     * @param leikbord
+     */
     public void warningAnim(Leikbord leikbord){
         ScaleTransition scale = new ScaleTransition();
         scale.setNode(this);

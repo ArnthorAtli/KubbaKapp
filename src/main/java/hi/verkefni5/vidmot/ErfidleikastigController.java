@@ -68,7 +68,6 @@ public class ErfidleikastigController {
                 stig3.setSelected(true);
                 break;
             default:
-                // Handle default case or throw an error
                 break;
         }
     }

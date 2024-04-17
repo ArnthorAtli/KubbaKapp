@@ -12,22 +12,14 @@ import java.io.IOException;
 
 public class ValmyndController {
 
+    //viðmótstilviksbreytur
     @FXML
     public RadioButton fxHljod;
-
-    @FXML
-    private Button fxNyrLeikur;
-
     @FXML
     private Button fxAfram;
 
-    @FXML
-    private Button fxTilBaka;
-
-    //togglegroup
-    private ToggleGroup erfidleikastig = new ToggleGroup();
+    //tilviksbreytur
     private Erfidleikaval erfidleikaval;
-
 
     /**
      * Þegar valmyndin er opnuð er kveikt á listener á milli fxHljod takkans og hljóðsins í Hljóðstillingaklasanum
@@ -59,10 +51,9 @@ public class ValmyndController {
      * Nýr leikur er hafinn
      */
     @FXML
-    private void onNyrLeikur(ActionEvent actionEvent) throws IOException {
+    private void onNyrLeikur(ActionEvent actionEvent) {
         if(KubbaKappController.getInstance() != null) {
             try {
-
                 KubbaKappController.getInstance().endurraesa();//ef það er leikur í gangi
                 lokaNuverandiGlugga(actionEvent);
             } catch (IllegalStateException e) {
@@ -97,8 +88,6 @@ public class ValmyndController {
             fxAfram.setText("Enginn leikur í gangi");
         }
     }
-
-
 
     /**
      * Alert dialog sem spyr hvort notandinn vilji hætta leik
@@ -178,7 +167,6 @@ public class ValmyndController {
             lokaNuverandiGlugga(actionEvent);
         }
     }
-
 
     /**
      * Lokar núverandi glugga

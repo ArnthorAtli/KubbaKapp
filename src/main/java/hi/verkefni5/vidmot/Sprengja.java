@@ -13,11 +13,8 @@ import java.net.URL;
 public class Sprengja extends Pane {
 
     //tilviksbreytur
-
     private ImageView imageView;
-
     private MediaPlayer mediaPlayer; // munið að bæta við dependency í pom.xml skrá og í module-info.java
-
     private Hljodstillingar hljodstillingar = Hljodstillingar.getHljodstillingar();
 
     /**
@@ -28,11 +25,9 @@ public class Sprengja extends Pane {
 
         this.setPrefSize(40, 40);
 
-
         imageView = new ImageView();
         imageView.setFitWidth(40);
         imageView.setFitHeight(40);
-
 
         URL url = getClass().getResource("/media/bomb.png");
         assert url != null;
@@ -42,7 +37,6 @@ public class Sprengja extends Pane {
 
         loadaHljodi();
     }
-
 
     /**
      * Birtir sprengju animation þegar klesst er á sprengju
@@ -84,5 +78,4 @@ public class Sprengja extends Pane {
             throw new IllegalArgumentException("Skráin fannst ekki: media/sprengjuhljod.mp3");
         }
     }
-
 }

@@ -22,7 +22,6 @@ public class Innskraning {
         return nafn2;
     }
 
-
     public static void main(String[] args) {
 
     }

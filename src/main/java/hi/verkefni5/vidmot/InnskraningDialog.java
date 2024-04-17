@@ -18,9 +18,6 @@ public class InnskraningDialog extends Dialog<Pair<String, String>> {
     @FXML
     private ButtonType fxHefjaLeik;
 
-
-
-
     /**
      * Smiður fyrir InnskraningDialog
      * Birtir skjá, leyfir notendum að skrá nöfn sín
@@ -30,7 +27,6 @@ public class InnskraningDialog extends Dialog<Pair<String, String>> {
         setDialogPane(lesaDialog());
         setResultConverter();
         iLagiRegla();
-
     }
 
     /**

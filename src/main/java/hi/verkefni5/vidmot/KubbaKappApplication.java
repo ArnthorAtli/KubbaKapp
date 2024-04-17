@@ -24,13 +24,17 @@ public class KubbaKappApplication extends Application {
     private static Innskraning loggedInLeikmadur2;
 
     /**
-     * getter fyrir innskráðan áskrifanda
+     * getter fyrir annan innskráðan áskrifanda
      * @return innskráður áskrifandi
      */
     public static Innskraning getLoggedInLeikmadur1() {
         return loggedInLeikmadur1;
     }
 
+    /**
+     * getter fyrir hinn innskráðan áskrifanda
+     * @return innskráður áskrifandi
+     */
     public static Innskraning getLoggedInLeikmadur2() {
         return loggedInLeikmadur2;
     }

@@ -6,11 +6,10 @@ public class Hljodstillingar {
 
     //tilviksbreytur
     private static Hljodstillingar hljodstillingar;
-
     private BooleanProperty hljodKveiktProperty = new SimpleBooleanProperty(true);;
 
     /**
-     * tómur smiður
+     * Tómur smiður
      */
     private Hljodstillingar() {}
 

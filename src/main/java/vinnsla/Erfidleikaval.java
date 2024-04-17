@@ -7,10 +7,11 @@ public class Erfidleikaval {
 
     //tilviksbreytur frumstilltar
     private static final Erfidleikaval valNotanda = new Erfidleikaval();
+    private StringProperty erfidleiki = new SimpleStringProperty("Auðvelt");
 
-    private StringProperty erfidleiki = new SimpleStringProperty("Auðvelt"); // Default difficulty
-
-    // tómur smiður
+    /**
+     * Tómur smiður
+     */
     private Erfidleikaval() {}
 
     /**
@@ -36,11 +37,6 @@ public class Erfidleikaval {
     public void setErfidleiki(String erfidleiki) {
         this.erfidleiki.set(erfidleiki);
     }
-
-    /**
-     * property breyta fyrir erfiðleikastigið
-     * @return
-     */
 
 }
 

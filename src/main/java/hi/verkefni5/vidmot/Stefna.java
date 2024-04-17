@@ -6,7 +6,6 @@ public enum Stefna {
     NIDUR (270),
     UPP (90);
 
-
     //tilviksbreyta
     private final int gradur;
 

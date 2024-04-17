@@ -8,7 +8,6 @@ import javafx.util.Duration;
 
 public class ExplodingAnimation {
 
-
     private ImageView mynd;
     int dalkur =0 ;
 
@@ -72,10 +71,4 @@ public class ExplodingAnimation {
         timeline.play();
     }
 
-    /*
-    public void stopAnimation(){
-        timeline.stop();
-    }
-
-     */
 }

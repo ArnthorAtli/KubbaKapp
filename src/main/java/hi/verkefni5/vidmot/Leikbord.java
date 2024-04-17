@@ -11,13 +11,15 @@ import vinnsla.Leikur;
 
 public class Leikbord extends Pane {
 
+    //viðmótstilviksbreytur
+    @FXML
+    private Grafari fxGrafari;
+
     //tilviksbreytur
     private Leikur leikur;
     private boolean leikurIGangi = true;
     private ObservableList<Gull> gullListi = FXCollections.observableArrayList();
     private ObservableList<Sprengja> sprengjuListi = FXCollections.observableArrayList();
-    @FXML
-    private Grafari fxGrafari;
     private Warning warning;
 
     /**
@@ -118,6 +120,9 @@ public class Leikbord extends Pane {
         leikurIGangi = false;
     }
 
+    /**
+     * Stillir boolean gildið svo að leikurinn sé í gangi
+     */
     public void raesaLeik(){
         leikurIGangi = true;
     }
@@ -135,7 +140,6 @@ public class Leikbord extends Pane {
         }
         return false;
     }
-
 
     /**
      * Nýtt gull er búið til og birt á slembnum stað, því er bætt í observable listann
@@ -170,7 +174,6 @@ public class Leikbord extends Pane {
             }
         }
     }
-
 
     /**
      * fjarlægir kassa og sprengjur af borðinu
@@ -215,20 +218,32 @@ public class Leikbord extends Pane {
         warningTimeline.play();
     }
 
+    /**
+     * Tekur í burt viðvörunarhringina áður en sprengjur birtast á leikborði
+     * @param randomX staðsetning x-ás á leikborði
+     * @param randomY staðsetning y-ás á leikborði
+     */
     private void deleteWarning(double randomX, double randomY) {
         this.getChildren().remove(this.warning);
     }
 
     /**
-     * Ný sprengja er búin til og birt á slembnum stað, henni er bætt í observable listann
+     * Ný viðvörun um að sprengja birtist á slembnum stað
+     * @param x staðsetning x-ás á leikborði
+     * @param y staðsetning y-ás á leikborði
      */
     private void framleidaWarning(double x, double y){
         this.warning = new Warning();
         warning.setLayoutX(x+20);
         warning.setLayoutY(y+20);
         warning.warningAnim(this);
-
     }
+
+    /**
+     * Ný sprengja er búin til og birt á slembnum stað, henni er bætt í observable listann
+     * @param randomX staðsetning x-ás á leikborði
+     * @param randomY staðsetning y-ás á leikborði
+     */
     private void framleidaSprengju(double randomX,double randomY) {
         Sprengja s = new Sprengja();
 

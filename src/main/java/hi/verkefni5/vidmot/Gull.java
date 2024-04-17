@@ -47,6 +47,10 @@ public class Gull extends Pane {
         return Color.rgb(values[0], values[1], values[2]);
     }
 
+    /**
+     * Lætur kubbana sogast til leikmans svipað og segull
+     * @param player leikmaður
+     */
     public void pickUpAnim(Grafari player) {
         TranslateTransition position = new TranslateTransition();
         double xMidjaGulls = this.getLayoutX() + this.getWidth() / 2;
@@ -87,6 +91,13 @@ public class Gull extends Pane {
         scale.play();
         position.play();
     }
+
+    /**
+     * Animation fyrir hringi sem sýna hvar sprengja er að fara að birtast
+     * spilum animation 0.1 sek eftir að animation byrjar vegna þess að
+     * annars byrjar gullið í original size og spilar svo animation
+     * @param leikbord tekur inn leikborðið
+     */
     public void spawnAnim(Leikbord leikbord){
         ScaleTransition scale = new ScaleTransition();
         scale.setNode(this);
@@ -101,7 +112,6 @@ public class Gull extends Pane {
                     leikbord.getChildren().add(this);
                 })
         );
-        //spilum animation 0.1 sek eftir að animation byrjar vegna þess að annars byrjar gullið í original size og spilar svo animation
         errorTimeline.play();
     }
 }

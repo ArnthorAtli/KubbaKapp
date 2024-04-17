@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -23,27 +22,24 @@ import java.util.Optional;
 
 public class UpphafsmyndController {
 
+    //viðmótstilviksbreytur
     @FXML
     private Button fxByrjaLeik;
-
-    @FXML
-    private Button fxStillingar;
-
-    @FXML
-    private ImageView fxMyndStillingar;
-
+    //@FXML
+    //private Button fxStillingar;
+    //@FXML
+    //private ImageView fxMyndStillingar;
     @FXML
     private Label fxLeikmadur1;
-
     @FXML
     private Label fxLeikmadur2;
-
     private MediaPlayer mediaPlayer;
-
     private static UpphafsmyndController instance;
-
     private Hljodstillingar hljodstillingar = Hljodstillingar.getHljodstillingar();
 
+    /**
+     * Smiður fyrir UpphafsmyndController
+     */
     public UpphafsmyndController() {
         instance = this;
     }
@@ -73,7 +69,6 @@ public class UpphafsmyndController {
 
         spilaLag();
     }
-
 
     /**
      * Þegar ýtt er á Byrja leik þá kemur upp dialog fyrir notanda að skrá sig inn með nöfnum
@@ -109,13 +104,12 @@ public class UpphafsmyndController {
     /**
      * Ýtum á stillingartakkann og fáum upp valmynd
      *
-     * @param actionEvent
+     * @param actionEvent ýtt á stillingartakkann
      */
     @FXML
     public void onStillingar(ActionEvent actionEvent) {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         try {
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("valmynd-view.fxml"));
             VBox content = fxmlLoader.load();
             Dialog<Void> dialog = new Dialog<>();
@@ -135,6 +129,11 @@ public class UpphafsmyndController {
 
     }
 
+    /**
+     * Ýtum á "Um forritið" í valmynd og fáum upplýsingar um hvernig leikurinn virkar
+     * og hvernig skla spila hann
+     * @param actionEvent ýtt á "Um forritið"
+     */
     @FXML
     private void onUmForritid(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -186,7 +185,6 @@ public class UpphafsmyndController {
         }
     }
 
-
     /**
      * getter fyrir tilviksbreytuna
      * @return
@@ -194,6 +192,5 @@ public class UpphafsmyndController {
     public static UpphafsmyndController getInstance() {
         return instance;
     }
-
 
 }
