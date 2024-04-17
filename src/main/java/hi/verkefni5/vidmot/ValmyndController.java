@@ -99,7 +99,7 @@ public class ValmyndController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Hætta leik");
         alert.setHeaderText("Ertu viss um að þú viljir hætta að spila?");
-        alert.setContentText("Veldu \"Hætta\" ef þú vilt hætta. \n Veldu \"Spila\" ef þú vilt spila áfram.");
+        alert.setContentText("Veldu \"Hætta\" ef þú vilt hætta. \nVeldu \"Spila\" ef þú vilt spila áfram.");
 
         ButtonType buttonTypeQuit = new ButtonType("Hætta");
         ButtonType buttonTypeCancel = new ButtonType("Spila", ButtonType.CANCEL.getButtonData());
