@@ -39,7 +39,7 @@ og síðan: `mvn javafx:run` til þess að keyra alla klasana í forritinu
 
 Version: 0.1
 
-Released: 09/04/2024
+Released: 17.04.2024
 
 ## Pakkar
 
